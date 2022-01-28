@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson34</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <!-- 6-1 Setup 函数的使用 -->
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        template: `
+       <div @click="handleClick">{{name}}</div>
+      `,
+
+        methods: {
+            test() {
+                console.log(this.$options.setup())
+            }
+        },
+        mounted() {
+            this.test();
+        },
+
+        //created 实例被完全初始化之前。无法使用this关键字，因为调取不到实例
+        //无法调用外部的方法和生命周期函数。return的模板可以被外部使用
+        setup(props, context) {
+            return {
+                name: 'dell',
+                handleClick: () => {
+                    alert('handleClick')
+                }
+            }
+        }
+    });
+    const vm = app.mount('#root');
+</script>
+
+</html>
